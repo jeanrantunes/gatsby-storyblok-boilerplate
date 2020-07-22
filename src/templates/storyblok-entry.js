@@ -1,42 +1,36 @@
-import React from 'react'
-import Components from '../components/components.js'
-import Navi from '../components/navi.js'
+import React, { useState, useEffect } from "react";
 
-class StoryblokEntry extends React.Component {
-  static getDerivedStateFromProps(props, state) {
-    if (state.story.uuid === props.pageContext.story.uuid) {
-      return null
+import Components from "../components/components";
+// import Navi from '../components/navi'
+
+const StoryblokEntry = ({ pageContext }) => {
+  const [story, setStory] = useState({ content: {} });
+  // const [globalNavi, setGlobalNavi] = useState({ content: {} })
+
+  useEffect(() => {
+    if (story.uuid === pageContext.story.uuid) {
+      return;
     }
 
-    return StoryblokEntry.prepareStory(props)
-  }
+    setStory({
+      ...pageContext.story,
+      content: JSON.parse(pageContext.story.content),
+    });
+    // setGlobalNavi({
+    //   ...globalNavi,
+    //   content: JSON.parse(pageContext.globalNavi.content)
+    // })
+  }, [story, pageContext.story]);
 
-  static prepareStory(props) {
-    const story = Object.assign({}, props.pageContext.story)
-    const globalNavi = Object.assign({}, props.pageContext.globalNavi)
-    story.content = JSON.parse(story.content)
-    globalNavi.content = JSON.parse(globalNavi.content)
-    
-    return { story, globalNavi }
-  }
+  return (
+    <div>
+      {/* <Navi blok={globalNavi.content}></Navi> */}
+      {React.createElement(Components(story.content.component), {
+        key: story.content._uid,
+        blok: story.content,
+      })}
+    </div>
+  );
+};
 
-  constructor(props) {
-    super(props)
-
-    this.state = StoryblokEntry.prepareStory(props)
-  }
-
-  render() {
-    let content = this.state.story.content
-    let globalNavi = this.state.globalNavi.content
-
-    return (
-      <div>
-        <Navi blok={globalNavi}></Navi>
-        {React.createElement(Components(content.component), {key: content._uid, blok: content})}
-      </div>
-    )
-  }
-}
-
-export default StoryblokEntry
+export default StoryblokEntry;

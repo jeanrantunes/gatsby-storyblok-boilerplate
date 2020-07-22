@@ -1,17 +1,17 @@
 module.exports = {
   siteMetadata: {
-    title: 'Gatsby Default Starter',
+    title: "Gatsby Default Starter",
   },
   plugins: [
     {
-      resolve: 'gatsby-source-storyblok',
+      resolve: "gatsby-source-storyblok",
       options: {
-        accessToken: 'bJQb8KcUXW4NJ35XJFwGuwtt',
-        homeSlug: 'home',
-        version: process.env.NODE_ENV === 'production' ? 'published' : 'draft'
-      }
+        accessToken: "fv7wrIeVFdM1vQySHk8wogtt",
+        homeSlug: "home",
+        version: process.env.NODE_ENV === "production" ? "published" : "draft",
+      },
     },
-    'gatsby-plugin-react-helmet',
+    "gatsby-plugin-react-helmet",
     {
       resolve: `gatsby-source-filesystem`,
       options: {
@@ -20,7 +20,7 @@ module.exports = {
       },
     },
     {
-      resolve: `gatsby-transformer-sharp`
+      resolve: `gatsby-transformer-sharp`,
     },
   ],
-}
+};
