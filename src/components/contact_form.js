@@ -7,20 +7,33 @@ const ContactForm = (props) => (
 
     <form
       name="contact"
-      method="POST"
-      netlify-honeypot="bot-field"
+      method="post"
+      action="/success"
       data-netlify="true"
+      data-netlify-honeypot="bot-field"
     >
-      <input type="hidden" name="contact" value="contact" />
-      <div>
-        <label>Your Email:</label>
-        <input type="email" name="email" />
+      <input type="hidden" name="bot-field" />
+      <input type="hidden" name="form-name" value="contact" />
+      <div className="field half first">
+        <label htmlFor="name">Name</label>
+        <input type="text" name="name" id="name" />
       </div>
-      <div>
-        <label>Message:</label>
-        <textarea name="message" />
+      <div className="field half">
+        <label htmlFor="email">Email</label>
+        <input type="text" name="email" id="email" />
       </div>
-      <button type="submit">Send</button>
+      <div className="field">
+        <label htmlFor="message">Message</label>
+        <textarea name="message" id="message" rows="6" />
+      </div>
+      <ul className="actions">
+        <li>
+          <input type="submit" value="Send Message" className="special" />
+        </li>
+        <li>
+          <input type="reset" value="Clear" />
+        </li>
+      </ul>
     </form>
   </SbEditable>
 );
