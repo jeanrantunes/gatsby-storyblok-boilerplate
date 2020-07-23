@@ -3,7 +3,14 @@ import SbEditable from "storyblok-react";
 
 const Feature = (props) => (
   <SbEditable content={props.blok}>
-    <form name="contact" data-netlify="true">
+    <form
+      method="post"
+      netlify-honeypot="bot-field"
+      data-netlify="true"
+      name="contact"
+    >
+      <input type="hidden" name="bot-field" />
+      <input type="hidden" name="form-name" value="contact" />
       <p>
         <label>
           Name <input type="text" name="name" />
