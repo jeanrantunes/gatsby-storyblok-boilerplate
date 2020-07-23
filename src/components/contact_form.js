@@ -1,82 +1,73 @@
 import React from "react";
-import { navigate } from "gatsby-link";
 
-function encode(data) {
+const encode = (data) => {
   return Object.keys(data)
     .map((key) => encodeURIComponent(key) + "=" + encodeURIComponent(data[key]))
     .join("&");
-}
+};
 
-export default class Contact extends React.Component {
+export default class ContactForm extends React.Component {
   constructor(props) {
     super(props);
-    this.state = {};
+    this.state = { name: "", email: "", message: "" };
   }
 
-  handleChange = (e) => {
-    this.setState({ [e.target.name]: e.target.value });
-  };
+  /* Here’s the juicy bit for posting the form submission */
 
   handleSubmit = (e) => {
-    e.preventDefault();
-    const form = e.target;
     fetch("/", {
       method: "POST",
       headers: { "Content-Type": "application/x-www-form-urlencoded" },
-      body: encode({
-        "form-name": form.getAttribute("name"),
-        ...this.state,
-      }),
+      body: encode({ "form-name": "contact", ...this.state }),
     })
-      .then(() => navigate(form.getAttribute("action")))
+      .then(() => alert("Success!"))
       .catch((error) => alert(error));
+
+    e.preventDefault();
   };
 
+  handleChange = (e) => this.setState({ [e.target.name]: e.target.value });
+
   render() {
+    const { name, email, message } = this.state;
     return (
-      <div>
-        <h1>Contact</h1>
-        <form
-          name="contact"
-          method="post"
-          data-netlify="true"
-          data-netlify-honeypot="bot-field"
-          onSubmit={this.handleSubmit}
-        >
-          {/* The `form-name` hidden field is required to support form submissions without JavaScript */}
-          <input type="hidden" name="form-name" value="contact" />
-          <p hidden>
-            <label>
-              Don’t fill this out:{" "}
-              <input name="bot-field" onChange={this.handleChange} />
-            </label>
-          </p>
-          <p>
-            <label>
-              Your name:
-              <br />
-              <input type="text" name="name" onChange={this.handleChange} />
-            </label>
-          </p>
-          <p>
-            <label>
-              Your email:
-              <br />
-              <input type="email" name="email" onChange={this.handleChange} />
-            </label>
-          </p>
-          <p>
-            <label>
-              Message:
-              <br />
-              <textarea name="message" onChange={this.handleChange} />
-            </label>
-          </p>
-          <p>
-            <button type="submit">Send</button>
-          </p>
-        </form>
-      </div>
+      <form onSubmit={this.handleSubmit}>
+        <p>
+          <label>
+            Your Name:{" "}
+            <input
+              type="text"
+              name="name"
+              value={name}
+              onChange={this.handleChange}
+            />
+          </label>
+        </p>
+        <p>
+          <label>
+            Your Email:{" "}
+            <input
+              type="email"
+              name="email"
+              value={email}
+              onChange={this.handleChange}
+            />
+          </label>
+        </p>
+        <p>
+          <label>
+            Message:{" "}
+            <textarea
+              name="message"
+              value={message}
+              onChange={this.handleChange}
+            />
+          </label>
+        </p>
+        <p>
+          <button type="submit">Send</button>
+        </p>
+      </form>
     );
   }
 }
