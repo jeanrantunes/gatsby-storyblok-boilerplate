@@ -21,15 +21,6 @@ export default class HTML extends React.Component {
             id="___gatsby"
             dangerouslySetInnerHTML={{ __html: this.props.body }}
           />
-          <form
-            name="contact"
-            method="post"
-            data-netlify="true"
-            data-netlify-honeypot="bot-field"
-          >
-            <input name="name" placeholder="Your name" type="text" />
-            <button type="submit">submit</button>
-          </form>
           {this.props.postBodyComponents}
         </body>
       </html>
