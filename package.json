@@ -4,6 +4,7 @@
   "version": "1.0.0",
   "author": "Alexander Feiglstorfer <delooks@gmail.com>",
   "dependencies": {
+    "axios": "^0.19.2",
     "gatsby": "^2.19.45",
     "gatsby-image": "^2.2.44",
     "gatsby-plugin-manifest": "^2.2.48",
@@ -13,6 +14,7 @@
     "gatsby-source-filesystem": "^2.1.56",
     "gatsby-source-storyblok": "^1.0.0",
     "gatsby-transformer-sharp": "^2.3.19",
+    "query-string": "^6.13.1",
     "react": "^16.13.0",
     "react-dom": "^16.13.0",
     "react-helmet": "^6.1.0",
