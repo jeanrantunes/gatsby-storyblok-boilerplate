@@ -1,18 +1,21 @@
 import React from "react";
+import SbEditable from "storyblok-react";
 
 const ContactForm = (props) => (
-  <div>
+  <SbEditable content={props.blok}>
     <h1>Contact</h1>
     <form
-      name="contact"
-      method="post"
+      name="contact-form"
+      methodx="post"
       data-netlify="true"
       data-netlify-honeypot="bot-field"
     >
       <input name="name" placeholder="Your name" type="text" />
+      <input name="email" placeholder="Your e-mail" type="text" />
+
       <button type="submit">submit</button>
     </form>
-  </div>
+  </SbEditable>
 );
 
 export default ContactForm;
