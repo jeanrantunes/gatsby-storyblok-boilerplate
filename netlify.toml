@@ -1,5 +1,5 @@
 [build]
-  functions = "src/functions"
+  functions = "lambda"
   command = "gatsby build"
   publish = "public/"
   environment = { NODE_VERSION = "12.18.0" }
