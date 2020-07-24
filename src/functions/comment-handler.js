@@ -12,12 +12,14 @@ const URL = "https://elegant-wiles-a8b2e1.netlify.app";
 */
 exports.handler = async (event, context, callback) => {
   // get the arguments from the notification
-  console.log(event.body);
-  // var body = JSON.parse(event.body);
-
-  // // prepare call to the Slack API
-  // var slackURL = process.env.SLACK_WEBHOOK_URL;
-  // var slackPayload = {
+  callback(null, {
+    statusCode: 200,
+    body: "Hello, World",
+  });
+  // const body = JSON.parse(event.body);
+  // // // prepare call to the Slack API
+  // const slackURL = process.env.SLACK_WEBHOOK_URL;
+  // const slackPayload = {
   //   text: "New comment on " + URL,
   //   attachments: [
   //     {
@@ -50,7 +52,7 @@ exports.handler = async (event, context, callback) => {
   //   ],
   // };
 
-  // // post the notification to Slack
+  // // // post the notification to Slack
   // request.post({ url: slackURL, json: slackPayload }, function (
   //   err,
   //   httpResponse,

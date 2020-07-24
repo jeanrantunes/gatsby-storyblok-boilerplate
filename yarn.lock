@@ -3142,7 +3142,7 @@ chalk@^3.0.0:
     ansi-styles "^4.1.0"
     supports-color "^7.1.0"
 
-chalk@^4.1.0:
+chalk@^4.0.0, chalk@^4.1.0:
   version "4.1.0"
   resolved "https://registry.yarnpkg.com/chalk/-/chalk-4.1.0.tgz#4e14870a618d9e2edd97dd8345fd9d9dc315646a"
   integrity sha512-qwx12AxXe2Q5xQ43Ac//I6v5aXTipYrSESdOgzrN+9XjgEpyjpKuvSGaN4qE93f7TQTlerQQ8S+EQ0EyDoVL1A==
@@ -8857,6 +8857,15 @@ neo-async@^2.5.0, neo-async@^2.6.1:
   version "2.6.2"
   resolved "https://registry.yarnpkg.com/neo-async/-/neo-async-2.6.2.tgz#b4aafb93e3aeb2d8174ca53cf163ab7d7308305f"
   integrity sha512-Yd3UES5mWCSqR+qNT93S3UoYUkqAZ9lLg8a7g9rimsWmYGK8cVToA4/sF3RrshdyV3sAGMXVUmpMYOw+dLpOuw==
+
+netlify-plugin-form-submissions@^0.1.4:
+  version "0.1.4"
+  resolved "https://registry.yarnpkg.com/netlify-plugin-form-submissions/-/netlify-plugin-form-submissions-0.1.4.tgz#1e52494a890e27232d44f87e6fbd2447f2139ff9"
+  integrity sha512-Sh1inh1BahBWAS+Be7gbSXpUVUaTg0JWHbaT/H4lor1cRrEx/rO8wkdGz/DY88qv7ucSEDqlS+1/0gKzgLRIrQ==
+  dependencies:
+    chalk "^4.0.0"
+    dotenv "^8.2.0"
+    node-fetch "^2.6.0"
 
 next-tick@^1.0.0:
   version "1.1.0"
