@@ -25,63 +25,64 @@ function purgeComment(id) {
   Handle the lambda invocation
 */
 exports.handler = async (event, context, callback) => {
+  console.log(event.body);
   // parse the payload
-  var body = event.body.split("payload=")[1];
-  var payload = JSON.parse(unescape(body));
-  var method = payload.actions[0].name;
-  var id = payload.actions[0].value;
+  // var body = event.body.split("payload=")[1];
+  // var payload = JSON.parse(unescape(body));
+  // var method = payload.actions[0].name;
+  // var id = payload.actions[0].value;
 
-  if (method == "delete") {
-    purgeComment(id);
-    callback(null, {
-      statusCode: 200,
-      body: "Comment deleted",
-    });
-  } else if (method == "approve") {
-    // get the comment data from the queue
-    var url = `https://api.netlify.com/api/v1/submissions/${id}?access_token=${NETLIFY_AUTH_TOKEN}`;
+  // if (method == "delete") {
+  //   purgeComment(id);
+  //   callback(null, {
+  //     statusCode: 200,
+  //     body: "Comment deleted",
+  //   });
+  // } else if (method == "approve") {
+  //   // get the comment data from the queue
+  //   var url = `https://api.netlify.com/api/v1/submissions/${id}?access_token=${NETLIFY_AUTH_TOKEN}`;
 
-    request(url, function (err, response, body) {
-      if (!err && response.statusCode === 200) {
-        var data = JSON.parse(body).data;
+  //   request(url, function (err, response, body) {
+  //     if (!err && response.statusCode === 200) {
+  //       var data = JSON.parse(body).data;
 
-        // now we have the data, let's massage it and post it to the approved form
-        var payload = {
-          "form-name": "approved-comments",
-          path: data.path,
-          received: new Date().toString(),
-          email: data.email,
-          name: data.name,
-          comment: data.comment,
-        };
-        var approvedURL = URL;
+  //       // now we have the data, let's massage it and post it to the approved form
+  //       var payload = {
+  //         "form-name": "approved-comments",
+  //         path: data.path,
+  //         received: new Date().toString(),
+  //         email: data.email,
+  //         name: data.name,
+  //         comment: data.comment,
+  //       };
+  //       var approvedURL = URL;
 
-        console.log("Posting to", approvedURL);
-        console.log(payload);
+  //       console.log("Posting to", approvedURL);
+  //       console.log(payload);
 
-        // post the comment to the approved lost
-        request.post({ url: approvedURL, formData: payload }, function (
-          err,
-          httpResponse,
-          body
-        ) {
-          var msg;
-          if (err) {
-            msg = "Post to approved comments failed:" + err;
-            console.log(msg);
-          } else {
-            msg = "Post to approved comments list successful.";
-            console.log(msg);
-            purgeComment(id);
-          }
-          var msg = "Comment registered. Site deploying to include it.";
-          callback(null, {
-            statusCode: 200,
-            body: msg,
-          });
-          return console.log(msg);
-        });
-      }
-    });
-  }
+  //       // post the comment to the approved lost
+  //       request.post({ url: approvedURL, formData: payload }, function (
+  //         err,
+  //         httpResponse,
+  //         body
+  //       ) {
+  //         var msg;
+  //         if (err) {
+  //           msg = "Post to approved comments failed:" + err;
+  //           console.log(msg);
+  //         } else {
+  //           msg = "Post to approved comments list successful.";
+  //           console.log(msg);
+  //           purgeComment(id);
+  //         }
+  //         var msg = "Comment registered. Site deploying to include it.";
+  //         callback(null, {
+  //           statusCode: 200,
+  //           body: msg,
+  //         });
+  //         return console.log(msg);
+  //       });
+  //     }
+  //   });
+  // }
 };
