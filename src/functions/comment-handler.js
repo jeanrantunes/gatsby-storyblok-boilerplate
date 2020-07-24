@@ -5,7 +5,7 @@ var request = require("request");
 // populate environment variables locally.
 require("dotenv").config();
 
-const URL = "https://elegant-wiles-a8b2e1.netlify.app/";
+const URL = "https://elegant-wiles-a8b2e1.netlify.app";
 
 /*
   Our serverless function handler

@@ -37,7 +37,7 @@ export default class Contact extends React.Component {
       <div>
         <h1>Contact</h1>
         <form
-          name="queue"
+          name="comments-queue"
           method="post"
           action="/success"
           data-netlify="true"
@@ -45,7 +45,7 @@ export default class Contact extends React.Component {
           onSubmit={this.handleSubmit}
         >
           {/* The `form-name` hidden field is required to support form submissions without JavaScript */}
-          <input type="hidden" name="form-name" value="queue" />
+          <input type="hidden" name="form-name" value="comments-queue" />
           <p hidden>
             <label>
               Don’t fill this out:{" "}
