@@ -12,8 +12,7 @@ const URL = "https://elegant-wiles-a8b2e1.netlify.app";
 */
 exports.handler = async (event, context, callback) => {
   // get the arguments from the notification
-  console.log(event.body);
-  // const body = JSON.parse(event.body);
+  const body = JSON.parse(event.body);
   // // prepare call to the Slack API
   const slackURL = process.env.SLACK_WEBHOOK_URL;
   const slackPayload = {
@@ -22,10 +21,10 @@ exports.handler = async (event, context, callback) => {
       {
         fallback: "New comment on the comment example site",
         color: "#444",
-        author_name: "body.data.email",
-        title: "body.data.path",
-        title_link: URL + "body.data.path",
-        text: "body.data.comment",
+        author_name: body.data.email,
+        title: body.data.path,
+        title_link: URL + body.data.path,
+        text: body.data.comment,
       },
       {
         fallback: "Manage comments on " + URL,
