@@ -24,7 +24,7 @@ function purgeComment(id) {
 /*
   Handle the lambda invocation
 */
-export function handler(event, context, callback) {
+exports.handler = async (event, context, callback) => {
   // parse the payload
   var body = event.body.split("payload=")[1];
   var payload = JSON.parse(unescape(body));
@@ -84,4 +84,4 @@ export function handler(event, context, callback) {
       }
     });
   }
-}
+};

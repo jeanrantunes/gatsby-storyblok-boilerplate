@@ -10,7 +10,7 @@ const URL = "https://elegant-wiles-a8b2e1.netlify.app";
 /*
   Our serverless function handler
 */
-export function handler(event, context, callback) {
+exports.handler = async (event, context, callback) => {
   // get the arguments from the notification
   var body = JSON.parse(event.body);
 
@@ -67,4 +67,4 @@ export function handler(event, context, callback) {
     });
     return console.log(msg);
   });
-}
+};
