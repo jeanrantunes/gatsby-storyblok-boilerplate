@@ -37,7 +37,7 @@ export default class Contact extends React.Component {
     return (
       <SbEditable content={this.props.blok}>
         <h1>Contact</h1>
-        <form
+        {/* <form
           name="queue"
           method="post"
           action="/success"
@@ -45,8 +45,7 @@ export default class Contact extends React.Component {
           data-netlify-honeypot="bot-field"
           onSubmit={this.handleSubmit}
         >
-          {/* The `form-name` hidden field is required to support form submissions without JavaScript */}
-          <input type="hidden" name="form-name" value="queue" />
+           <input type="hidden" name="form-name" value="queue" />
           <p hidden>
             <label>
               Don’t fill this out:{" "}
@@ -71,7 +70,7 @@ export default class Contact extends React.Component {
           <p>
             <button type="submit">Enviar</button>
           </p>
-        </form>
+        </form> */}
       </SbEditable>
     );
   }
