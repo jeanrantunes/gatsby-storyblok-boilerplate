@@ -38,7 +38,7 @@ export default class Contact extends React.Component {
       <SbEditable content={this.props.blok}>
         <h1>Contact</h1>
         <form
-          name="comments-queue"
+          name="contact"
           method="post"
           action="/success/"
           data-netlify="true"
@@ -46,7 +46,7 @@ export default class Contact extends React.Component {
           onSubmit={this.handleSubmit}
         >
           {/* The `form-name` hidden field is required to support form submissions without JavaScript */}
-          <input type="hidden" name="form-name" value="comments-queue" />
+          <input type="hidden" name="form-name" value="contact" />
           <p hidden>
             <label>
               Don’t fill this out:{" "}
