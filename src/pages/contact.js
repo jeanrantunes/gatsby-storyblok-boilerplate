@@ -77,7 +77,7 @@ export default class Contact extends React.Component {
             <button type="submit">Send</button>
           </p>
         </form>
-        <form name="approved-comments"></form>
+        <form name="approved-comments" data-netlify="true"></form>
       </div>
     );
   }
