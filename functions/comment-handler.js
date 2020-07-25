@@ -23,8 +23,6 @@ exports.handler = async (event, context, callback) => {
         fallback: "New comment on the comment example site",
         color: "#444",
         author_name: body.data.email,
-        title: body.data.path,
-        title_link: URL + body.data.path,
         text: body.data.comment,
       },
       {
