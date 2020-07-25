@@ -10,7 +10,17 @@ const URL = "https://elegant-wiles-a8b2e1.netlify.app";
 exports.handler = (event, context, callback) => {
   // get the arguments from the notification
   const body = JSON.parse(event.body);
-  // // prepare call to the Slack API
+  const body1 = event.body.split("payload=")[1];
+  const payload = JSON.parse(unescape(body1));
+  const method = payload.actions[0].name;
+  const id = payload.actions[0].value;
+
+  console.log(body1);
+  console.log(payload);
+  console.log("method", method);
+  console.log("id", id);
+
+  // prepare call to the Slack API
   const slackURL = process.env.SLACK_WEBHOOK_URL;
   const slackPayload = {
     text: "New comment on " + URL,
