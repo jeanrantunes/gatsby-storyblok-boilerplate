@@ -9,7 +9,7 @@ const URL = "https://elegant-wiles-a8b2e1.netlify.app";
 /*
   delete this submission via the api
 */
-function purgeComment(id) {
+function purgeComment(id, callback) {
   const url = `https://api.netlify.com/api/v1/submissions/${id}?access_token=${NETLIFY_AUTH_TOKEN}`;
 
   axios({
@@ -38,7 +38,7 @@ exports.handler = (event, context, callback) => {
   const id = payload.actions[0].value;
 
   if (method === "delete") {
-    purgeComment(id);
+    purgeComment(id, callback);
   } else if (method === "approve") {
     // get the comment data from the queue
     const url = `https://api.netlify.com/api/v1/submissions/${id}?access_token=${NETLIFY_AUTH_TOKEN}`;
