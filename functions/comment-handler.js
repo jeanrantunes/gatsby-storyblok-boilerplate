@@ -53,11 +53,11 @@ exports.handler = (event, context, callback) => {
   })
     .then((resp) => {
       callback(null, {
-        statusCode: 500,
-        body: resp,
+        statusCode: 200,
+        body: resp.statusText,
       });
     })
     .catch((error) => {
-      callback(new Error("Something went wrong"));
+      callback(null, { statusCode: 500, body: JSON.stringify(error.response) });
     });
 };
