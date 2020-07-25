@@ -30,7 +30,7 @@ function purgeComment(id) {
 /*
   Handle the lambda invocation
 */
-exports.handler = async (event, context, callback) => {
+exports.handler = (event, context, callback) => {
   // parse the payload
   const body = event.body.split("payload=")[1];
   const payload = JSON.parse(unescape(body));
