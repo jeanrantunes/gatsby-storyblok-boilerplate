@@ -1,6 +1,6 @@
 [build]
   functions = "lambda"
-  command = "gatsby build"
+  command = "npm run prod"
   publish = "public/"
   environment = { NODE_VERSION = "12.18.0" }
 
