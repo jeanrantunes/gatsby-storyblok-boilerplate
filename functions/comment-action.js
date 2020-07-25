@@ -5,7 +5,7 @@ require("dotenv").config();
 const { NETLIFY_AUTH_TOKEN } = process.env;
 
 // hardcoding this for a moment... TODO: replace request with somethign that follows redirects
-const URL = "https://elegant-wiles-a8b2e1.netlify.app/";
+const URL = "https://elegant-wiles-a8b2e1.netlify.app";
 
 /*
   delete this submission via the api
