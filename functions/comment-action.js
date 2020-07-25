@@ -25,13 +25,16 @@ function purgeComment(id) {
   Handle the lambda invocation
 */
 exports.handler = async (event, context, callback) => {
-  console.log(event.body);
   // parse the payload
-  // var body = event.body.split("payload=")[1];
-  // var payload = JSON.parse(unescape(body));
-  // var method = payload.actions[0].name;
-  // var id = payload.actions[0].value;
+  const body = event.body.split("payload=")[1];
+  const payload = JSON.parse(unescape(body));
+  const method = payload.actions[0].name;
+  const id = payload.actions[0].value;
 
+  console.log(body);
+  console.log(payload);
+  console.log("method", method);
+  console.log("id", id);
   // if (method == "delete") {
   //   purgeComment(id);
   //   callback(null, {
