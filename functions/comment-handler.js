@@ -13,6 +13,7 @@ const URL = "https://elegant-wiles-a8b2e1.netlify.app";
 exports.handler = async (event, context, callback) => {
   // get the arguments from the notification
   const body = JSON.parse(event.body);
+  console.log(body);
   // // prepare call to the Slack API
   const slackURL = process.env.SLACK_WEBHOOK_URL;
   const slackPayload = {
@@ -34,14 +35,14 @@ exports.handler = async (event, context, callback) => {
             type: "button",
             text: "Approve comment",
             name: "approve",
-            value: "body.id",
+            value: body.id,
           },
           {
             type: "button",
             style: "danger",
             text: "Delete comment",
             name: "delete",
-            value: "body.id",
+            value: body.id,
           },
         ],
       },

@@ -32,7 +32,10 @@
     "start": "npm run develop",
     "format": "prettier --write \"src/**/*.js\"",
     "test": "echo \"Error: no test specified\" && exit 1",
-    "postinstall": "netlify-lambda install"
+    "postinstall": "netlify-lambda install",
+    "start:lambda": "netlify-lambda serve functions",
+    "build:lambda": "netlify-lambda build functions",
+    "prod": "npm run build; npm run build:lambda"
   },
   "devDependencies": {
     "prettier": "^2.0.5"

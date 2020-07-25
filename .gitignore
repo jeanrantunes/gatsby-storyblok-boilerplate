@@ -65,3 +65,6 @@ package-lock.json
 
 # Local Netlify folder
 .netlify
+
+# ignore lambda build
+/lambda
