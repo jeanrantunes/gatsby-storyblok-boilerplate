@@ -1,7 +1,7 @@
 [build]
   functions = "lambda"
   command = "npm run prod"
-  publish = "public/"
+  publish = "public"
   environment = { NODE_VERSION = "12.18.0" }
 
 # Config for the Netlify Build Plugin: netlify-plugin-form-submissions
