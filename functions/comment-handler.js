@@ -1,16 +1,13 @@
 "use strict";
 
-var request = require("request");
+const axios = require("axios");
 
 // populate environment variables locally.
 require("dotenv").config();
 
 const URL = "https://elegant-wiles-a8b2e1.netlify.app";
 
-/*
-  Our serverless function handler
-*/
-exports.handler = async (event, context, callback) => {
+exports.handler = (event, context, callback) => {
   // get the arguments from the notification
   const body = JSON.parse(event.body);
   // // prepare call to the Slack API
@@ -45,24 +42,22 @@ exports.handler = async (event, context, callback) => {
       },
     ],
   };
-  // // post the notification to Slack
-  request.post({ url: slackURL, json: slackPayload }, function (
-    err,
-    httpResponse,
-    body
-  ) {
-    console.log(err);
-    console.log(body);
-    var msg;
-    if (err) {
-      msg = "Post to Slack failed:" + err;
-    } else {
-      msg = "Post to Slack successful!  Server responded with:" + body;
-    }
-    callback(null, {
-      statusCode: 200,
-      body: msg,
+  // post the notification to Slack
+
+  axios({
+    method: "post",
+    url: slackURL,
+    data: {
+      ...slackPayload,
+    },
+  })
+    .then((resp) => {
+      callback(null, {
+        statusCode: 500,
+        body: resp,
+      });
+    })
+    .catch((error) => {
+      callback(new Error("Something went wrong"));
     });
-    return console.log(msg);
-  });
 };
