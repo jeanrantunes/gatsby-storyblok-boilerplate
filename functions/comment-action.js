@@ -23,6 +23,7 @@ function purgeComment(id) {
       });
     })
     .catch((err) => {
+      console.log("delete", err);
       callback(null, { statusCode: 500, body: JSON.stringify(error.response) });
     });
 }
@@ -37,10 +38,8 @@ exports.handler = async (event, context, callback) => {
   const id = payload.actions[0].value;
 
   if (method === "delete") {
-    console.log(id);
     purgeComment(id);
   } else if (method === "approve") {
-    console.log(id);
     // get the comment data from the queue
     const url = `https://api.netlify.com/api/v1/submissions/${id}?access_token=${NETLIFY_AUTH_TOKEN}`;
 
@@ -56,6 +55,7 @@ exports.handler = async (event, context, callback) => {
         });
       })
       .catch((error) => {
+        console.log(error);
         callback(null, {
           statusCode: 500,
           body: JSON.stringify(error.response),
