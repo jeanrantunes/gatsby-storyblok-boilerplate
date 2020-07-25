@@ -19,7 +19,7 @@ function purgeComment(id, callback) {
     .then((resp) => {
       callback(null, {
         statusCode: 200,
-        body: "Comment deleted from queue",
+        body: "Comentário não aprovado.",
       });
     })
     .catch((err) => {
@@ -31,7 +31,6 @@ function purgeComment(id, callback) {
   Handle the lambda invocation
 */
 exports.handler = (event, context, callback) => {
-  // parse the payload
   const body = event.body.split("payload=")[1];
   const payload = JSON.parse(unescape(body));
   const method = payload.actions[0].name;
@@ -48,62 +47,41 @@ exports.handler = (event, context, callback) => {
       url,
     })
       .then((resp) => {
-        console.log(resp);
-        callback(null, {
-          statusCode: 200,
-          body: resp.statusText,
-        });
+        const { name, email, comment } = resp.data;
+
+        const payload = {
+          "form-name": "approved-comments",
+          received: new Date().toString(),
+          email: email,
+          name: name,
+          comment: comment,
+        };
+
+        axios({
+          method: "post",
+          url,
+          data: {
+            formData: payload,
+          },
+        })
+          .then((response) => {
+            callback(null, {
+              statusCode: 200,
+              body: "Depoimento aprovado.",
+            });
+          })
+          .catch((error) => {
+            callback(null, {
+              statusCode: 500,
+              body: "Problema ao postar o depoimento",
+            });
+          });
       })
       .catch((error) => {
-        console.log(error);
         callback(null, {
           statusCode: 500,
           body: JSON.stringify(error.response),
         });
       });
-
-    // request(url, function (err, response, body) {
-    //   if (!err && response.statusCode === 200) {
-    //     const data = JSON.parse(body).data;
-
-    //     // now we have the data, let's massage it and post it to the approved form
-    //     const payload = {
-    //       "form-name": "approved-comments",
-    //       path: data.path,
-    //       received: new Date().toString(),
-    //       email: data.email,
-    //       name: data.name,
-    //       comment: data.comment,
-    //     };
-
-    //     const approvedURL = URL;
-
-    //     console.log("Posting to", approvedURL);
-    //     console.log(payload);
-
-    //     // post the comment to the approved lost
-    //     request.post({ url: approvedURL, formData: payload }, function (
-    //       err,
-    //       httpResponse,
-    //       body
-    //     ) {
-    //       var msg;
-    //       if (err) {
-    //         msg = "Post to approved comments failed:" + err;
-    //         console.log(msg);
-    //       } else {
-    //         msg = "Post to approved comments list successful.";
-    //         console.log(msg);
-    //         purgeComment(id);
-    //       }
-    //       var msg = "Comment registered. Site deploying to include it.";
-    //       callback(null, {
-    //         statusCode: 200,
-    //         body: msg,
-    //       });
-    //       return console.log(msg);
-    //     });
-    //   }
-    // });
   }
 };
