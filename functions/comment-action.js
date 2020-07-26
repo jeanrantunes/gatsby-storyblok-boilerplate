@@ -50,16 +50,15 @@ exports.handler = (event, context, callback) => {
       url,
     })
       .then((resp) => {
-        const { name, email, comment } = resp.data;
-        console.log(resp.data);
+        const { name, email, comment } = resp.data.data;
         const payload = {
           "form-name": "approved-comments",
-          // received: new Date().toString(),
+          received: new Date().toString(),
           email: email,
           name: name,
           comment: comment,
         };
-        // console.log(payload);
+        console.log(payload);
 
         axios({
           method: "post",
