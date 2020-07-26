@@ -1,7 +1,4 @@
-"use strict";
-
 const axios = require("axios");
-
 // populate environment variables locally.
 require("dotenv").config();
 
@@ -61,6 +58,10 @@ exports.handler = (event, context, callback) => {
       });
     })
     .catch((error) => {
-      callback(null, { statusCode: 500, body: JSON.stringify(error.response) });
+      console.warn(error);
+      callback(null, {
+        statusCode: 500,
+        body: "Problema ao enviar comentário para o slack.",
+      });
     });
 };

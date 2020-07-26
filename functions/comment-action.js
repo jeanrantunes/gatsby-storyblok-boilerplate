@@ -1,4 +1,3 @@
-const request = require("request");
 const axios = require("axios");
 const FormData = require("form-data");
 // populate environment variables locally.
@@ -24,7 +23,7 @@ function purgeComment(id, callback) {
       });
     })
     .catch((err) => {
-      console.log("delete", err);
+      console.warn("delete", err);
       callback(null, {
         statusCode: 500,
         body: "Problema ao excluir o comentário",
@@ -74,14 +73,13 @@ exports.handler = (event, context, callback) => {
           data: form,
         })
           .then((response) => {
-            console.log(response);
             callback(null, {
               statusCode: 200,
               body: "Depoimento aprovado.",
             });
           })
           .catch((error) => {
-            console.log(error);
+            console.warn(error);
             callback(null, {
               statusCode: 500,
               body: "Problema ao postar o depoimento",
@@ -89,7 +87,7 @@ exports.handler = (event, context, callback) => {
           });
       })
       .catch((error) => {
-        console.log(error);
+        console.warn(error);
         callback(null, {
           statusCode: 500,
           body: "Problema ae consultar o comentário na fila.",
