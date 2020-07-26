@@ -63,8 +63,9 @@ exports.handler = (event, context, callback) => {
         axios({
           method: "post",
           url: URL,
+          headers: { "Content-Type": "multipart/form-data" },
           data: {
-            formData: payload,
+            ...payload,
           },
         })
           .then((response) => {
