@@ -51,7 +51,7 @@ exports.handler = (event, context, callback) => {
     })
       .then((resp) => {
         const { name, email, comment } = resp.data;
-
+        console.log(resp.data);
         const payload = {
           "form-name": "approved-comments",
           // received: new Date().toString(),
@@ -59,7 +59,7 @@ exports.handler = (event, context, callback) => {
           name: name,
           comment: comment,
         };
-        console.log(payload);
+        // console.log(payload);
 
         axios({
           method: "post",
