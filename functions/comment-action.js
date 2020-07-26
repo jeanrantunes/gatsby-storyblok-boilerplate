@@ -1,5 +1,6 @@
 const request = require("request");
 const axios = require("axios");
+const FormData = require("form-data");
 // populate environment variables locally.
 require("dotenv").config();
 const { NETLIFY_AUTH_TOKEN } = process.env;
@@ -58,18 +59,22 @@ exports.handler = (event, context, callback) => {
           name: name,
           comment: comment,
         };
-        console.log(payload);
+        
+        const form = new FormData()
+        form.append('form-name', 'approved-comments');
+        form.append('received', new Date().toString());
+        form.append('email', email);
+        form.append('name', name);
+        form.append('comment', comment);
 
         axios({
           method: "post",
-          url: URL,
-          headers: { "Content-Type": "multipart/form-data" },
-          data: {
-            ...payload,
-          },
+          url: URL, 
+          form, {
+            headers: form.getHeaders(),
+          }
         })
           .then((response) => {
-            console.log();
             console.log(response);
             callback(null, {
               statusCode: 200,
