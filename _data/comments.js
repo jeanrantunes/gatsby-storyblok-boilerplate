@@ -1,7 +1,7 @@
 // massage the approved comments data into the shape we'd like
 // embelish the data with gravatars
 const submissions = require("./approved-comments_submissions.json");
-
+console.log(submissions);
 module.exports = () => {
   let comments = {};
 
