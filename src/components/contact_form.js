@@ -1,7 +1,7 @@
 import React from "react";
-import SbEditable from "storyblok-react";
 import { navigate } from "gatsby-link";
-
+import SbEditable from "storyblok-react";
+import commentsJson from "../../_data/approved-comments_submissions.json";
 function encode(data) {
   return Object.keys(data)
     .map((key) => encodeURIComponent(key) + "=" + encodeURIComponent(data[key]))
@@ -12,6 +12,15 @@ export default class Contact extends React.Component {
   constructor(props) {
     super(props);
     this.state = {};
+  }
+
+  componentDidMount() {
+    const comments = commentsJson.map((c) => ({
+      name: c.data.name,
+      email: c.data.email,
+      comment: c.data.comment,
+    }));
+    this.setState({ comments });
   }
 
   handleChange = (e) => {
@@ -37,15 +46,16 @@ export default class Contact extends React.Component {
     return (
       <SbEditable content={this.props.blok}>
         <h1>Contact</h1>
-        {/* <form
-          name="queue"
+        <form
+          name="comments-queue"
           method="post"
           action="/success"
           data-netlify="true"
           data-netlify-honeypot="bot-field"
           onSubmit={this.handleSubmit}
         >
-           <input type="hidden" name="form-name" value="queue" />
+          {/* The `form-name` hidden field is required to support form submissions without JavaScript */}
+          <input type="hidden" name="form-name" value="comments-queue" />
           <p hidden>
             <label>
               Don’t fill this out:{" "}
@@ -54,23 +64,35 @@ export default class Contact extends React.Component {
           </p>
           <p>
             <label>
-              Nome:
+              Your name:
               <br />
               <input type="text" name="name" onChange={this.handleChange} />
             </label>
           </p>
-
           <p>
             <label>
-              Comentário:
+              Your email:
+              <br />
+              <input type="email" name="email" onChange={this.handleChange} />
+            </label>
+          </p>
+          <p>
+            <label>
+              Comment:
               <br />
               <textarea name="comment" onChange={this.handleChange} />
             </label>
           </p>
           <p>
-            <button type="submit">Enviar</button>
+            <button type="submit">Send</button>
           </p>
-        </form> */}
+        </form>
+        <form name="approved-comments" data-netlify="true">
+          <input hidden type="text" name="name" />
+          <input hidden type="text" name="email" />
+          <textarea hidden type="text" name="comment" />
+        </form>
+        {JSON.stringify(this.state)}
       </SbEditable>
     );
   }
