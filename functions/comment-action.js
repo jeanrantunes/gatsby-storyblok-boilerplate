@@ -59,20 +59,19 @@ exports.handler = (event, context, callback) => {
           name: name,
           comment: comment,
         };
-        
-        const form = new FormData()
-        form.append('form-name', 'approved-comments');
-        form.append('received', new Date().toString());
-        form.append('email', email);
-        form.append('name', name);
-        form.append('comment', comment);
+
+        const form = new FormData();
+        form.append("form-name", "approved-comments");
+        form.append("received", new Date().toString());
+        form.append("email", email);
+        form.append("name", name);
+        form.append("comment", comment);
 
         axios({
           method: "post",
-          url: URL, 
-          form, {
-            headers: form.getHeaders(),
-          }
+          url: URL,
+          headers: form.getHeaders(),
+          data: form,
         })
           .then((response) => {
             console.log(response);
