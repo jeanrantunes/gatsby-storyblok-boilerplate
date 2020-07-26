@@ -24,7 +24,10 @@ function purgeComment(id, callback) {
     })
     .catch((err) => {
       console.log("delete", err);
-      callback(null, { statusCode: 500, body: JSON.stringify(error.response) });
+      callback(null, {
+        statusCode: 500,
+        body: "Problema ao excluir o comentário",
+      });
     });
 }
 /*
@@ -48,7 +51,7 @@ exports.handler = (event, context, callback) => {
     })
       .then((resp) => {
         const { name, email, comment } = resp.data;
-
+        console.log(resp.data);
         const payload = {
           "form-name": "approved-comments",
           received: new Date().toString(),
@@ -56,6 +59,8 @@ exports.handler = (event, context, callback) => {
           name: name,
           comment: comment,
         };
+
+        console.log(payload);
 
         axios({
           method: "post",
@@ -65,12 +70,14 @@ exports.handler = (event, context, callback) => {
           },
         })
           .then((response) => {
+            console.log(response);
             callback(null, {
               statusCode: 200,
               body: "Depoimento aprovado.",
             });
           })
           .catch((error) => {
+            console.log(error);
             callback(null, {
               statusCode: 500,
               body: "Problema ao postar o depoimento",
@@ -78,9 +85,10 @@ exports.handler = (event, context, callback) => {
           });
       })
       .catch((error) => {
+        console.log(error);
         callback(null, {
           statusCode: 500,
-          body: JSON.stringify(error.response),
+          body: "Problema ae consultar o comentário na fila.",
         });
       });
   }
