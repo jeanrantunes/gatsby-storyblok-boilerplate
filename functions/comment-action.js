@@ -62,12 +62,13 @@ exports.handler = (event, context, callback) => {
 
         axios({
           method: "post",
-          url,
+          URL,
           data: {
             formData: payload,
           },
         })
           .then((response) => {
+            console.log();
             console.log(response);
             callback(null, {
               statusCode: 200,
