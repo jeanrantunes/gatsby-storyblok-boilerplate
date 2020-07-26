@@ -62,7 +62,7 @@ exports.handler = (event, context, callback) => {
 
         axios({
           method: "post",
-          URL,
+          url: URL,
           data: {
             formData: payload,
           },
