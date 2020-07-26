@@ -1,6 +1,6 @@
 import React from "react";
 import { navigate } from "gatsby-link";
-import json from "../../_data/approved-comments_submissions.json";
+import commentsJson from "../../_data/approved-comments_submissions.json";
 function encode(data) {
   return Object.keys(data)
     .map((key) => encodeURIComponent(key) + "=" + encodeURIComponent(data[key]))
@@ -14,7 +14,12 @@ export default class Contact extends React.Component {
   }
 
   componentDidMount() {
-    console.log(json);
+    const comments = commentsJson.map((c) => ({
+      name: c.data.name,
+      email: c.data.email,
+      comment: c.data.comment,
+    }));
+    this.setState({ comments });
   }
 
   handleChange = (e) => {
@@ -86,6 +91,7 @@ export default class Contact extends React.Component {
           <input hidden type="text" name="email" />
           <textarea hidden type="text" name="comment" />
         </form>
+        {JSON.stringify(this.state)}
       </div>
     );
   }
