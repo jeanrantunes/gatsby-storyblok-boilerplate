@@ -1,6 +1,6 @@
 import React from "react";
 import { navigate } from "gatsby-link";
-
+import json from "../../_data/approved-comments_submissions.json";
 function encode(data) {
   return Object.keys(data)
     .map((key) => encodeURIComponent(key) + "=" + encodeURIComponent(data[key]))
@@ -11,6 +11,10 @@ export default class Contact extends React.Component {
   constructor(props) {
     super(props);
     this.state = {};
+  }
+
+  componentDidMount() {
+    console.log(json);
   }
 
   handleChange = (e) => {
